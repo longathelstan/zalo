@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="https://stc-zaloprofile.zdn.vn/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Zalo - Nhắn Gửi Yêu Thương (Nhắn tin thoại - Trò chuyện nhóm ...)">
+    <meta property="og:title" content="Zalo - Tlowng" />
+    <meta property="og:description" content="Zalo - Nhắn Gửi Yêu Thương (Nhắn tin thoại - Trò chuyện nhóm ...)" />
+    <meta property="og:image" content="https://qr.zalo.me/sl/2/31d677636032896cd023"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&display=swap" rel="stylesheet" />
+    <title>Zalo - Tlowng</title>
+    <script src="https://za.zdn.vn/v3/za.js"></script>
+    <script defer="defer" src="https://stc-zaloprofile.zdn.vn/profile/static/js/main.1.0.6.js"></script>
+    <link href="https://stc-zaloprofile.zdn.vn/profile/static/css/main.1.0.6.css" rel="stylesheet" />
+    <style>
+      body {
+        font-family: 'Lexend', sans-serif;
+      }
+      #header {
+        display: flex;  
+        justify-content: center;
+        align-items: center; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%;
+        height: 65px;
+        padding: 15px; 
+        text-align: center; 
+        z-index: 2000; 
+        font-size: 1rem;
+        background-color: rgba(255, 255, 255, 0.6); 
+        color: #2d3748; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      #avatar-image {
+        width: auto;
+        height: 35px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+
+      #footer {
+        position: fixed; 
+        bottom: 0; 
+        left: 0; 
+        width: 100%;
+        padding: 20px; 
+        text-align: center;
+        z-index: 1000; 
+        background-color: rgba(255, 255, 255, 0.6); 
+        color: #2d3748;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        backdrop-filter: blur(10px);
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .gradient-animation {
+        background-size: 200% 200%;
+        animation: gradient 2s ease infinite;
+      }
+      
+      .cursor-follow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        background: radial-gradient(circle, rgba(141, 165, 201, 0.4), transparent 80%);
+        background-size: 150% 150%;
+        transition: background-position 0.03s ease;
+        z-index: 1;
+      }
+      #typing-text {
+        max-width: 112px;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: .15em solid #7782BE; 
+      }
+      
+      @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+      }
+      
+      @keyframes blink-caret {
+        from, to { border-color: transparent; }
+        50% { border-color: #7782BE; }
+      }
+    </style>
+  </head>
+  <body onmousemove="handleMouseMove(event)">
+    <a id="header" href="https://longathelstan.xyz">
+      <img
+      loading="lazy"
+      class="box-color"
+      id="avatar-image"
+      src="https://s240-ava-talk.zadn.vn/4/3/8/f/12/240/333e8bcdde138fa433431155c3d3704c.jpg"
+      alt=""
+      aria-hidden="true"/>
+      <span id="typing-text"></span>
+    </a>
+    
+    <div id="footer">
+      © Copyright 2024 longathelstan ft. zalo , All right Reserved.
+    </div>
+    
+    <div id="root">
+      <script>
+        window.pageInfo = {
+          "type": 2,
+          "name": "Tlowng",
+          "avatar": "https://s240-ava-talk.zadn.vn/4/3/8/f/12/240/333e8bcdde138fa433431155c3d3704c.jpg",
+          "thumbnail": "https://qr.zalo.me/sl/2/31d677636032896cd023",
+          "description": "more@https://longathelstan.xyz/",
+          "qrCodeUrl": "https://qr-talk.zdn.vn/9/6501632/8479c2ccd59d3cc3658c.jpg",
+          "user": {
+            "isBusiness": false,
+            "showBanner": false
+          },
+          "messageInfo": {
+            "type": "phone",
+            "argv": "0373171979",
+            "hasZWebSession": true,
+            "convId": "5207876207076590541"
+          },
+        };
+        window.pageInfo.index = 2;
+
+        function handleMouseMove(event) {
+          const { clientX, clientY } = event;
+          const { innerWidth, innerHeight } = window;
+          
+          const xPos = (clientX / innerWidth) * 100;
+          const yPos = (clientY / innerHeight) * 100;
+          
+          const cursorFollow = document.querySelector('.cursor-follow');
+          cursorFollow.style.backgroundPosition = `${xPos}% ${yPos}%`;
+        }
+
+        const typingText = document.getElementById("typing-text");
+
+        async function typeText(text, duration) {
+          typingText.innerHTML = "";
+          const textWidth = typingText.offsetWidth; 
+          typingText.style.animation = `typing ${duration}s steps(${textWidth}, end) forwards, blink-caret .75s step-end infinite`;
+
+          for (let i = 0; i < text.length; i++) {
+            typingText.innerHTML += text.charAt(i);
+            await new Promise(resolve => setTimeout(resolve, 100)); 
+          }
+        }
+
+        async function animateText() {
+          while (true) {
+            await typeText("longathelstan", 4); 
+            await new Promise(resolve => setTimeout(resolve, 1000)); 
+            typingText.innerHTML = ""; 
+            await typeText("a fullstack", 3); 
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            typingText.innerHTML = ""; 
+            await typeText("developer", 3); 
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            typingText.innerHTML = ""; 
+            await typeText("iu haanhh lémm", 3); 
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            typingText.innerHTML = ""; 
+          }
+        }
+
+        animateText(); 
+      </script>
+    </div>
+    <div class="cursor-follow"></div>
+  </body>
+</html>
